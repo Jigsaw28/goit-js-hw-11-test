@@ -25,7 +25,7 @@ async function onSubmitForm(e) {
   const newCard = await searchImageService.fetchImage();
 
   loadMoreBtn.style.display = 'block';
-    const { hits, totalHits } = newCard;
+  const { hits, totalHits } = newCard;
   try {
     if (hits.length === 0) {
       return error;
@@ -42,8 +42,19 @@ async function onSubmitForm(e) {
 }
 
 async function onLoadMore() {
-  const newCard = await searchImageService.fetchImage();
-  appendMarkup(newCard.hits);
+  try {
+    const { totalHits, hits } = await searchImageService.fetchImage();
+    const totalPage = totalHits / searchImageService.page;
+    if (searchImageService.page > totalPage) {
+      return error;
+    }
+    appendMarkup(hits);
+  } catch (error) {
+    loadMoreBtn.style.display = 'none';
+    Notiflix.Notify.info(
+      "We're sorry, but you've reached the end of search results."
+    );
+  }
 }
 
 function renderCards(cards) {
