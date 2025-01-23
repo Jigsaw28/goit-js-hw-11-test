@@ -9,17 +9,21 @@
   </head>
   <body>
     <container class="container">
-    <form class="search-form" id="search-form">
-      <input
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search images..."
-      />
-      <button type="submit">Search</button>
-    </form>
-    <div class="gallery"></div>
-    <button type="button" class="load-more">Load more</button>
+      <form class="search-form" id="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search images..."
+        />
+        <button type="submit">
+          <svg class="search-icon" width="9" height="9">
+            <use href="./images/sprite.svg#search"></use>
+          </svg>
+        </button>
+      </form>
+      <div class="gallery"></div>
+      <button type="button" class="load-more">Load more</button>
     </container>
   </body>
 </html>

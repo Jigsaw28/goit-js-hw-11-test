@@ -39,7 +39,6 @@ async function onSubmitForm(e) {
     }
     Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
     appendMarkup(hits);
-    scrollOptimization();
   } catch (error) {
     loadMoreBtn.style.display = 'none';
     Notiflix.Notify.failure(
@@ -57,6 +56,7 @@ async function onLoadMore() {
       return error;
     }
     appendMarkup(hits);
+    scrollOptimization();
   } catch (error) {
     loadMoreBtn.style.display = 'none';
     Notiflix.Notify.info(
@@ -101,7 +101,6 @@ function renderCards(cards) {
 
 function appendMarkup(card) {
   listEl.insertAdjacentHTML('beforeend', renderCards(card));
-  scrollOptimization();
   lightbox.refresh();
 }
 
@@ -111,8 +110,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 function scrollOptimization() {
   const { height: cardHeight } =
-        listEl.firstElementChild.getBoundingClientRect();
-    console.log(cardHeight)
+    listEl.firstElementChild.getBoundingClientRect();
   window.scrollBy({
     top: cardHeight * 2,
     behavior: 'smooth',
